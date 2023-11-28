@@ -25,23 +25,23 @@ export class redisManager {
         break;
       }
       case '6': {
-        await redisClient.getanddelete(payload.key);
+        return await redisClient.getanddelete(payload.key);
         break;
       }
       case '7': {
-        await redisClient.getByRange(payload.key, payload.start, payload.end);
+        return await redisClient.getByRange(payload.key, parseInt(payload.start), parseInt(payload.end));
         break;
       }
       case '8': {
-        await redisClient.incr(payload.key);
+        return await redisClient.incr(payload.key);
         break;
       }
       case '9': {
-        await redisClient.increaseBy(payload.key, payload.increment);
+        return await redisClient.increaseBy(payload.key, payload.increment);
         break;
       }
       case '10': {
-        await redisClient.lcs(payload.key1, payload.key2);
+        return await redisClient.lcs(payload.key1, payload.key2);
         break;
       }
       case '11': {
