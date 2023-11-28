@@ -115,6 +115,9 @@ class RedisClient {
   }
 
   async multipleGet(key1:string, key2: string){
+    let arr = [];
+    arr.push(key1);
+    arr.push(key2);
     return this.client.MGET(key1, key2, (err: any, reply: any) => {
       if (err) {
         console.error(err);
@@ -126,7 +129,12 @@ class RedisClient {
   }
 
   async multipleSet(key1:string, key2: string, value1: any, value2: any){
-    return this.client.MSET(key1, value1, key2, value2, (err: any, reply: any) => {
+    let arr = [];
+    arr.push(key1);
+    arr.push(value1);
+    arr.push(key2);
+    arr.push(value2);
+    return this.client.MSET(arr, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
@@ -137,7 +145,12 @@ class RedisClient {
   }
 
   async multipleSetNotExist(key1:string, key2: string, value1: any, value2: any){
-    return this.client.MSETNX(key1, value1, key2, value2, (err: any, reply: any) => {
+    let arr = [];
+    arr.push(key1);
+    arr.push(value1);
+    arr.push(key2);
+    arr.push(value2);
+    return this.client.MSETNX(arr, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {

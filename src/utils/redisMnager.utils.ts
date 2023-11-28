@@ -45,28 +45,28 @@ export class redisManager {
         break;
       }
       case '11': {
-        await redisClient.multipleGet(payload.key1, payload.key2);
+        return await redisClient.multipleGet(payload.key1, payload.key2);
         break;
       }
       case '12': {
-        await redisClient.multipleSet(payload.key1, payload.key2, payload.value1, payload.value2);
+        return await redisClient.multipleSet(payload.key1, payload.key2, payload.value1, payload.value2);
         break;
       }
       case '13': {
-        await redisClient.multipleSetNotExist(payload.key1, payload.key2, payload.value1, payload.value2);
+        return await redisClient.multipleSetNotExist(payload.key1, payload.key2, payload.value1, payload.value2);
         break;
       }
       case '14': {
-        await redisClient.setex(payload.key, payload.value, payload.expiresInSeconds);
+        return await redisClient.setex(payload.key, payload.value, payload.expiresInSeconds);
         break;
       }
 
       case '15': {
-        await redisClient.setByRange(payload.key, payload.value, payload.offset);
+        return await redisClient.setByRange(payload.key, payload.value, payload.offset);
         break;
       }
       case '16': {
-        await redisClient.getLength(payload.key);
+        return await redisClient.getLength(payload.key);
         break;
       }
     }
