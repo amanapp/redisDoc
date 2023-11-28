@@ -44,7 +44,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -54,51 +53,46 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
-  async decreaseBy(key:string, decrement: number){
-    return this.client.decrby(key, decrement, (err: any, reply: any) => {
+  async decreaseBy(key:string, decrement: any){
+    return this.client.DECRBY(key, decrement, (err: any, reply: any) => {
       if (err) {
-        console.error(err);
+        console.error(err.message);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async getanddelete(key:string){
-    return this.client.getdel(key, (err: any, reply: any) => {
+    return this.client.GETDEL(key, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
   
   async getByRange(key: string, start: number, end: number){
-    return this.client.getrange(key, start, end, (err: any, reply: any) => {
+    return this.client.GETRANGE(key, start, end, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
-        console.log(reply); // Should log "is is a"
-        this.client.quit(); // Close the Redis connection
+        console.log(reply); 
       }
     });
   }
 
   async increaseBy(key:string, increment: number){
-    return this.client.incrby(key, increment, (err: any, reply: any) => {
+    return this.client.INCRBY(key, increment, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -109,73 +103,79 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async multipleGet(key1:string, key2: string){
-    return this.client.mget(key1, key2, (err: any, reply: any) => {
+    let arr = [];
+    arr.push(key1);
+    arr.push(key2);
+    return this.client.MGET(key1, key2, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async multipleSet(key1:string, key2: string, value1: any, value2: any){
-    return this.client.mset(key1, value1, key2, value2, (err: any, reply: any) => {
+    let arr = [];
+    arr.push(key1);
+    arr.push(value1);
+    arr.push(key2);
+    arr.push(value2);
+    return this.client.MSET(arr, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async multipleSetNotExist(key1:string, key2: string, value1: any, value2: any){
-    return this.client.msetnx(key1, value1, key2, value2, (err: any, reply: any) => {
+    let arr = [];
+    arr.push(key1);
+    arr.push(value1);
+    arr.push(key2);
+    arr.push(value2);
+    return this.client.MSETNX(arr, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async setex(key:string, value:any, expiresInSeconds: number){
-    return this.client.setex(key, expiresInSeconds, value, (err: any, reply: any) => {
+    return this.client.SETEX(key, expiresInSeconds, value, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async setByRange(key:string, value:any, offset: number){
-    return this.client.setrange(key, offset, value, (err: any, reply: any) => {
+    return this.client.SETRANGE(key, offset, value, (err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
 
   async getLength(key:string){
-    return this.client.strlen(key,(err: any, reply: any) => {
+    return this.client.STRLEN(key,(err: any, reply: any) => {
       if (err) {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }

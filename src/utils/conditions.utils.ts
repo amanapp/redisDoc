@@ -70,6 +70,8 @@ export const Conditions = {
         "Query Params": {
             "choice": '7',
             "key": "your Key",
+            "start": "starting range",
+            "end": "ending range"
         },
         "description":"Get the key-value by range from redis",
         "Redis Method": "getrange",
