@@ -44,7 +44,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -54,7 +53,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -65,7 +63,6 @@ class RedisClient {
         console.error(err.message);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -76,7 +73,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -87,7 +83,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -98,7 +93,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -109,7 +103,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -123,7 +116,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -139,7 +131,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -155,7 +146,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -166,7 +156,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -177,7 +166,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
@@ -188,7 +176,6 @@ class RedisClient {
         console.error(err);
       } else {
         console.log(reply); 
-        this.client.quit(); 
       }
     });
   }
