@@ -53,6 +53,51 @@ export class redisManager {
       case '16': {
         return await redisClient.getLength(payload.key);
       }
+      case '17': {
+        return await redisClient.hashSet(payload.key, payload.field, payload.value);
+      }
+      case '18': {
+        return await redisClient.deleteHashField(payload.key, payload.field);
+      }
+      case '19': {
+        return await redisClient.ExistFiledInHash(payload.key, payload.field);
+      }
+      case '20': {
+        return await redisClient.GetHashField(payload.key, payload.field);
+      }
+      case '21': {
+        return await redisClient.GetHash(payload.key);
+      }
+      case '22': {
+        return await redisClient.IncreaseHashFieldVal(payload.key, payload.field, payload.increment);
+      }
+      case '23': {
+        return await redisClient.IncreaseHashFieldFloatValue(payload.key, payload.field, payload.increment);
+      }
+      case '24': {
+        return await redisClient.HashAllField(payload.key);
+      }
+      case '25': {
+        return await redisClient.HashLength(payload.key);
+      }
+      case '26': {
+        return await redisClient.GetMultipleFieldFromHash(payload.key, payload.field1, payload.field2, payload.field3);
+      }
+      case '27': {
+        return await redisClient.GetRandomValuesFromHash(payload.key);
+      }
+      case '28': {
+        return await redisClient.ScanHash(payload.key, payload.cursor);
+      }
+      case '29': {
+        return await redisClient.HashFieldNotExist(payload.key, payload.field, payload.value);
+      }
+      case '30': {
+        return await redisClient.HashFieldLength(payload.key, payload.field);
+      }
+      case '31': {
+        return await redisClient.GetHashValues(payload.key);
+      }
     }
   }
 }
