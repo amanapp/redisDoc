@@ -98,6 +98,60 @@ export class redisManager {
       case '31': {
         return await redisClient.GetHashValues(payload.key);
       }
+      case'32':{
+        return await redisClient.ListPushHead(payload.key, payload.value);
+      }
+      case'33':{
+        return await redisClient.ListPushTail(payload.key, payload.value);
+      }
+      case'34':{
+        return await redisClient.ListPopHead(payload.key);
+      }
+      case'35':{
+        return await redisClient.ListPopTail(payload.key);
+      }
+      case'36':{
+        return await redisClient.ListLength(payload.key);
+      }
+      case'37':{
+        return await redisClient.ListLength(payload.key);
+      }
+      case'38':{
+        return await redisClient.ListMove(payload.source,payload.destination,payload.to,payload.from);
+      }
+      case'39':{
+        return await redisClient.ListRange(payload.key,payload.to,payload.from);
+      }
+      case'40':{
+        return await redisClient.ListTrim(payload.key,payload.start,payload.end);
+      }
+      case'41':{
+        return await redisClient.ListTrim(payload.key,payload.start,payload.end);
+      }
+      case'42':{
+        return await redisClient.ListAppend(payload.key,payload.element);
+      }
+      case'43':{
+        return await redisClient.ListSet(payload.key,payload.index,payload.element);
+      }
+      case'44':{
+        return await redisClient.ListElementRemove(payload.key,payload.count,payload.element);
+      }
+      case'45':{
+        return await redisClient.ListElementRemove(payload.key,payload.count,payload.element);
+      }
+      case'46':{
+        return await redisClient.ListAppendL(payload.key,payload.element);
+      }
+      case'47':{
+        return await redisClient.ListPosition(payload.key,payload.element,payload.rank,payload.count,payload.len);
+      }
+      case'48':{
+        return await redisClient.ListInsert(payload.key,payload.referance,payload.pivat,payload.element);
+      }
+      case'49':{
+        return await redisClient.ListIndex(payload.key,payload.index);
+      }
     }
   }
 }
