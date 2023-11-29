@@ -9,16 +9,17 @@ class RedisClient {
     this.client = createClient({
       socket: {
         host: SERVER.REDIS.HOST,
-        port: parseInt(<string>SERVER.REDIS.PORT)
+        port: parseInt(<string>SERVER.REDIS.PORT),
       },
     });
-    this.client.on("error", (error: any) => loggers.info(`${customMessage.REDIS_NOT_CONNECTED}`));
+    this.client.on("error", (error: any) =>
+      loggers.info(`${customMessage.REDIS_NOT_CONNECTED}`)
+    );
   }
 
   async connect() {
     await this.client.connect();
-    loggers.info(`${customMessage.REDIS_CONECTED}`)
-
+    loggers.info(`${customMessage.REDIS_CONECTED}`);
   }
   async set(key: any, value: any, option?: any): Promise<any> {
     return await this.client.set(key, value, option);
@@ -39,13 +40,17 @@ class RedisClient {
     return result;
   }
   async append(key: any, value: any) {
-    return await this.client.append(key, ` ${value}`, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
+    return await this.client.append(
+      key,
+      ` ${value}`,
+      (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
       }
-    });
+    );
   }
   async decrease(key: string) {
     return this.client.decr(key, (err: any, reply: any) => {
@@ -135,7 +140,12 @@ class RedisClient {
     });
   }
 
-  async multipleSetNotExist(key1: string, key2: string, value1: any, value2: any) {
+  async multipleSetNotExist(
+    key1: string,
+    key2: string,
+    value1: any,
+    value2: any
+  ) {
     let arr = [];
     arr.push(key1);
     arr.push(value1);
@@ -151,13 +161,18 @@ class RedisClient {
   }
 
   async setex(key: string, value: any, expiresInSeconds: number) {
-    return this.client.SETEX(key, expiresInSeconds, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
+    return this.client.SETEX(
+      key,
+      expiresInSeconds,
+      value,
+      (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
       }
-    });
+    );
   }
 
   async setByRange(key: string, value: any, offset: number) {
@@ -231,23 +246,33 @@ class RedisClient {
   }
 
   async IncreaseHashFieldVal(key: string, field: any, increment: any) {
-    return this.client.HINCRBY(key, field, increment, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
+    return this.client.HINCRBY(
+      key,
+      field,
+      increment,
+      (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
       }
-    });
+    );
   }
 
   async IncreaseHashFieldFloatValue(key: string, field: any, increment: any) {
-    return this.client.HINCRBYFLOAT(key, field, increment, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
+    return this.client.HINCRBYFLOAT(
+      key,
+      field,
+      increment,
+      (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
       }
-    });
+    );
   }
 
   async HashAllField(key: string) {
@@ -270,7 +295,12 @@ class RedisClient {
     });
   }
 
-  async GetMultipleFieldFromHash(key: string, field1: string, field2: string, field3: string) {
+  async GetMultipleFieldFromHash(
+    key: string,
+    field1: string,
+    field2: string,
+    field3: string
+  ) {
     let arr = [];
     arr.push(field1);
     arr.push(field2);
@@ -333,7 +363,160 @@ class RedisClient {
       }
     });
   }
+  async ListPushHead(key: string, value: any) {
+    console.log(key, value);
+    return this.client.LPUSH(key, value, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+    // await this.client.lPush(
+    //   'bikes:repairs', ['bike:1', 'bike:2', 'bike:3', 'bike:4', 'bike:5']
+    // );
+  }
+  async ListPushTail(key: string, value: string) {
+    console.log(key, value);
+    return this.client.RPUSH(key, value, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
 
-
+  async ListPopHead(key: string) {
+    console.log(key);
+    return this.client.LPOP(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListPopTail(key: string) {
+    console.log(key);
+    return this.client.RPOP(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListLength(key: string) {
+    console.log(key);
+    return this.client.LLEN(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListMove(
+    source: string,
+    destination: string,
+    to: string,
+    from: string
+  ) {
+    return this.client.LMOVE(
+      source,
+      destination,
+      to,
+      from,
+      (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
+      }
+    );
+  }
+  async ListRange(key: string, to: number, from: number) {
+    return this.client.LRANGE(key, to, from, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListTrim(key: string, start: number, end: number) {
+    return this.client.LTRIM(key, start, end, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListAppend(key: string, element:object) {
+    return this.client.RPUSHX(key, element, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListSet(key: string,index:string, element:string) {
+    return this.client.LSET(key,index, element, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListElementRemove(key: string,count:string, element:string) {
+    return this.client.LREM(key,count, element, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListAppendL(key: string, element:object) {
+    return this.client.LPUSHX(key, element, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListPosition(key: string, element:string,rank:string,count:string ,len:string) {
+    return this.client.LPOS(key, element,rank,count,len, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListInsert(key: string,referance:string,pivat:string, element:string) {
+    return this.client.LINSERT(key,referance,pivat, element, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListIndex(key: string,index:string) {
+    return this.client.LINDEX(key,index, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
 }
 export const redisClient = new RedisClient();
