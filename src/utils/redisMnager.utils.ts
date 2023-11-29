@@ -98,6 +98,54 @@ export class redisManager {
       case '31': {
         return await redisClient.GetHashValues(payload.key);
       }
+      case '55': {
+        return await redisClient.AddSet(payload.key, payload.value);
+      }
+      case '56': {
+        return await redisClient.SetCardinality(payload.key);
+      }
+      case '57': {
+        return await redisClient.DifferenceBtwSets(payload.key);
+      }
+      case '58': {
+        return await redisClient.StoreSetDifference(payload.key, payload.keys);
+      }
+      case '59': {
+        return await redisClient.SetIntersect(payload.key);
+      }
+      case '60': {
+        return await redisClient.SetIntersectStore(payload.key, payload.keys);
+      }
+      case '61': {
+        return await redisClient.IsSetMember(payload.key, payload.member);
+      }
+      case '62': {
+        return await redisClient.SetAllMember(payload.key);
+      }
+      case '63': {
+        return await redisClient.IsSetMembers(payload.key, payload.members);
+      }
+      case '64': {
+        return await redisClient.MoveSetMember(payload.source, payload.destination, payload.member);
+      }
+      case '65': {
+        return await redisClient.PopSetMember(payload.key, payload.option);
+      }
+      case '66': {
+        return await redisClient.SetRandomNumber(payload.key, payload.option);
+      }
+      case '67': {
+        return await redisClient.RemoveSpecificMemberFromSet(payload.key, payload.member);
+      }
+      case '68': {
+        return await redisClient.ScanSet(payload.key, payload.cursor);
+      }
+      case '69': {
+        return await redisClient.UnionOfSet(payload.key);
+      }
+      case '70': {
+        return await redisClient.StoreUnionOfSet(payload.key, payload.keys);
+      }
     }
   }
 }

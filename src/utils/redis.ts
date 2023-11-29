@@ -334,6 +334,187 @@ class RedisClient {
     });
   }
 
+  async AddSet(key: string, value: any) {
+    return this.client.SADD(key, value, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async SetCardinality(key: string) {
+    return this.client.SCARD(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async DifferenceBtwSets(key: any) {
+    return this.client.SDIFF(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async StoreSetDifference(key: any, keys: any) {
+    return this.client.SDIFFSTORE(key, keys, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async SetIntersect(key: any) {
+    return this.client.SINTER(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async SetIntersectStore(key: any, keys:any) {
+    return this.client.SINTERSTORE(key, keys, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async IsSetMember(key: any, member:any) {
+    return this.client.SISMEMBER(key, member, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async SetAllMember(key: any) {
+    return this.client.SMEMBERS(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async IsSetMembers(key: any, members: any) {
+    return this.client.SMISMEMBER(key, members, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async MoveSetMember(source: any, destination:any, member: any) {
+    return this.client.SMOVE(source, destination, member, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async PopSetMember(key: any, option?: any) {
+    if(option){
+      return this.client.SPOP(key, option.count, (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
+      });
+    }
+    else{
+      return this.client.SPOP(key, (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
+      });
+    }
+  }
+
+  async SetRandomNumber(key: any, option?: any) {
+    if(option){
+      return this.client.SRANDMEMBER(key, option.count, (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
+      });
+    }
+    else{
+      return this.client.SRANDMEMBER(key, (err: any, reply: any) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(reply);
+        }
+      });
+    }
+  }
+
+  async RemoveSpecificMemberFromSet(key: any, member: any) {
+    return this.client.SREM(key, member, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async ScanSet(key: any, cursor: any) {
+    return this.client.SSCAN(key, cursor, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async UnionOfSet(key: any) {
+    return this.client.SUNION(key, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+
+  async StoreUnionOfSet(key: any, keys: any) {
+    return this.client.SUNIONSTORE(key, keys, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
 
 }
 export const redisClient = new RedisClient();
