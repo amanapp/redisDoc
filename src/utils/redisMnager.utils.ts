@@ -2,212 +2,279 @@ import { redisClient } from "./redis";
 
 export class redisManager {
   async redisChoice(payload: any) {
-    console.log("Payload&&&&&&&&", payload);
     switch (payload.choice) {
       case '1': {
-        return await redisClient.set(payload.key, payload.value);
+        const respose = await redisClient.set(payload.key, payload.value);
+        return respose;
       }
       case '2': {
-        return await redisClient.get(payload.key);
+        const respose = await redisClient.get(payload.key);
+        return respose;
       }
       case '3': {
-        return await redisClient.append(payload.key, payload.value);
+        const respose = await redisClient.append(payload.key, payload.value);
+        return respose;
       }
       case '4': {
-        return await redisClient.decrease(payload.key);
+        const respose = await redisClient.decrease(payload.key);
+        return respose;
       }
       case '5': {
-        return await redisClient.decreaseBy(payload.key, payload.decrement);
+        const respose = await redisClient.decreaseBy(payload.key, payload.decrement);
+        return respose;
       }
       case '6': {
-        return await redisClient.getanddelete(payload.key);
+        const respose = await redisClient.getanddelete(payload.key);
+        return respose;
       }
       case '7': {
-        return await redisClient.getByRange(payload.key, parseInt(payload.start), parseInt(payload.end));
+        const respose = await redisClient.getByRange(payload.key, parseInt(payload.start), parseInt(payload.end));
+        return respose;
       }
       case '8': {
-        return await redisClient.incr(payload.key);
+        const respose = await redisClient.incr(payload.key);
+        return respose;
       }
       case '9': {
-        return await redisClient.increaseBy(payload.key, payload.increment);
+        const respose = await redisClient.increaseBy(payload.key, payload.increment);
+        return respose;
       }
       case '10': {
-        return await redisClient.lcs(payload.key1, payload.key2);
+        const respose = await redisClient.lcs(payload.key1, payload.key2);
+        return respose;
       }
       case '11': {
-        return await redisClient.multipleGet(payload.key1, payload.key2);
+        const respose = await redisClient.multipleGet(payload.key1, payload.key2);
+        return respose;
       }
       case '12': {
-        return await redisClient.multipleSet(payload.key1, payload.key2, payload.value1, payload.value2);
+        const respose = await redisClient.multipleSet(payload.key1, payload.key2, payload.value1, payload.value2);
+        return respose;
       }
       case '13': {
-        return await redisClient.multipleSetNotExist(payload.key1, payload.key2, payload.value1, payload.value2);
+        const respose = await redisClient.multipleSetNotExist(payload.key1, payload.key2, payload.value1, payload.value2);
+        return respose;
       }
       case '14': {
-        return await redisClient.setex(payload.key, payload.value, payload.expiresInSeconds);
+        const respose = await redisClient.setex(payload.key, payload.value, payload.expiresInSeconds);
+        return respose;
       }
 
       case '15': {
-        return await redisClient.setByRange(payload.key, payload.value, payload.offset);
+        const respose = await redisClient.setByRange(payload.key, payload.value, payload.offset);
+        return respose;
       }
       case '16': {
-        return await redisClient.getLength(payload.key);
+        const respose = await redisClient.getLength(payload.key);
+        return respose;
       }
       case '17': {
-        return await redisClient.hashSet(payload.key, payload.field, payload.value);
+        const respose = await redisClient.hashSet(payload.key, payload.field, payload.value);
+        return respose;
       }
       case '18': {
-        return await redisClient.deleteHashField(payload.key, payload.field);
+        const respose = await redisClient.deleteHashField(payload.key, payload.field);
+        return respose;
       }
       case '19': {
-        return await redisClient.ExistFiledInHash(payload.key, payload.field);
+        const respose = await redisClient.ExistFiledInHash(payload.key, payload.field);
+        return respose;
       }
       case '20': {
-        return await redisClient.GetHashField(payload.key, payload.field);
+        const respose = await redisClient.GetHashField(payload.key, payload.field);
+        return respose;
       }
       case '21': {
-        return await redisClient.GetHash(payload.key);
+        const respose = await redisClient.GetHash(payload.key);
+        return respose;
       }
       case '22': {
-        return await redisClient.IncreaseHashFieldVal(payload.key, payload.field, payload.increment);
+        const respose = await redisClient.IncreaseHashFieldVal(payload.key, payload.field, payload.increment);
+        return respose;
       }
       case '23': {
-        return await redisClient.IncreaseHashFieldFloatValue(payload.key, payload.field, payload.increment);
+        const respose = await redisClient.IncreaseHashFieldFloatValue(payload.key, payload.field, payload.increment);
+        return respose;
       }
       case '24': {
-        return await redisClient.HashAllField(payload.key);
+        const respose = await redisClient.HashAllField(payload.key);
+        return respose;
       }
       case '25': {
-        return await redisClient.HashLength(payload.key);
+        const respose = await redisClient.HashLength(payload.key);
+        return respose;
       }
       case '26': {
-        return await redisClient.GetMultipleFieldFromHash(payload.key, payload.field1, payload.field2, payload.field3);
+        const respose = await redisClient.GetMultipleFieldFromHash(payload.key, payload.field1, payload.field2, payload.field3);
+        return respose;
       }
       case '27': {
-        return await redisClient.GetRandomValuesFromHash(payload.key);
+        const respose = await redisClient.GetRandomValuesFromHash(payload.key);
+        return respose;
       }
       case '28': {
-        return await redisClient.ScanHash(payload.key, payload.cursor);
+        const respose = await redisClient.ScanHash(payload.key, payload.cursor);
+        return respose;
       }
       case '29': {
-        return await redisClient.HashFieldNotExist(payload.key, payload.field, payload.value);
+        const respose = await redisClient.HashFieldNotExist(payload.key, payload.field, payload.value);
+        return respose;
       }
       case '30': {
-        return await redisClient.HashFieldLength(payload.key, payload.field);
+        const respose = await redisClient.HashFieldLength(payload.key, payload.field);
+        return respose;
       }
       case '31': {
-        return await redisClient.GetHashValues(payload.key);
+        const respose = await redisClient.GetHashValues(payload.key);
+        return respose;
       }
       case '32': {
-        return await redisClient.ListPushHead(payload.key, payload.value);
+        const respose = await redisClient.ListPushHead(payload.key, payload.value);
+        return respose;
       }
       case '33': {
-        return await redisClient.ListPushTail(payload.key, payload.value);
+        const respose = await redisClient.ListPushTail(payload.key, payload.value);
+        return respose;
       }
       case '34': {
-        return await redisClient.ListPopHead(payload.key);
+        const respose = await redisClient.ListPopHead(payload.key);
+        return respose;
       }
       case '35': {
-        return await redisClient.ListPopTail(payload.key);
+        const respose = await redisClient.ListPopTail(payload.key);
+        return respose;
       }
       case '36': {
-        return await redisClient.ListLength(payload.key);
+        const respose = await redisClient.ListLength(payload.key);
+        return respose;
       }
       case '37': {
-        return await redisClient.ListLength(payload.key);
+        const respose = await redisClient.ListLength(payload.key);
+        return respose;
       }
       case '38': {
-        return await redisClient.ListMove(payload.source, payload.destination, payload.to, payload.from);
+        const respose = await redisClient.ListMove(payload.source, payload.destination, payload.to, payload.from);
+        return respose;
       }
       case '39': {
-        return await redisClient.ListRange(payload.key, payload.to, payload.from);
+        const respose = await redisClient.ListRange(payload.key, payload.to, payload.from);
+        return respose;
       }
       case '40': {
-        return await redisClient.ListTrim(payload.key, payload.start, payload.end);
+        const respose = await redisClient.ListTrim(payload.key, payload.start, payload.end);
+        return respose;
       }
       case '41': {
-        return await redisClient.ListTrim(payload.key, payload.start, payload.end);
+        const respose = await redisClient.ListTrim(payload.key, payload.start, payload.end);
+        return respose;
       }
       case '42': {
-        return await redisClient.ListAppend(payload.key, payload.element);
+        const respose = await redisClient.ListAppend(payload.key, payload.element);
+        return respose;
       }
       case '43': {
-        return await redisClient.ListSet(payload.key, payload.index, payload.element);
+        const respose = await redisClient.ListSet(payload.key, payload.index, payload.element);
+        return respose;
       }
       case '44': {
-        return await redisClient.ListElementRemove(payload.key, payload.count, payload.element);
+        const respose = await redisClient.ListElementRemove(payload.key, payload.count, payload.element);
+        return respose;
       }
       case '45': {
-        return await redisClient.ListElementRemove(payload.key, payload.count, payload.element);
+        const respose = await redisClient.ListElementRemove(payload.key, payload.count, payload.element);
+        return respose;
       }
       case '46': {
-        return await redisClient.ListAppendL(payload.key, payload.element);
+        const respose = await redisClient.ListAppendL(payload.key, payload.element);
+        return respose;
       }
       case '47': {
-        return await redisClient.ListPosition(payload.key, payload.element, payload.rank, payload.count, payload.len);
+        const respose = await redisClient.ListPosition(payload.key, payload.element, payload.rank, payload.count, payload.len);
+        return respose;
       }
       case '48': {
-        return await redisClient.ListInsert(payload.key, payload.referance, payload.pivat, payload.element);
+        const respose = await redisClient.ListInsert(payload.key, payload.referance, payload.pivat, payload.element);
+        return respose;
       }
       case '49': {
-        return await redisClient.ListIndex(payload.key, payload.index);
+        const respose = await redisClient.ListIndex(payload.key, payload.index);
+        return respose;
       }
       case '50': {
-        return await redisClient.ListBlmove(payload.source, payload.destination,payload.to,payload.from,payload.timeout);
+        const respose = await redisClient.ListBlmove(payload.source, payload.destination,payload.to,payload.from,payload.timeout);
+        return respose;
       }
       case '51': {
-        return await redisClient.ListBlpop(payload.timeout,payload.key);
+        const respose = await redisClient.ListBlpop(payload.timeout,payload.key);
+        return respose;
       }
       case '52': {
-        return await redisClient.ListBrpop(payload.timeout,payload.key);
+        const respose = await redisClient.ListBrpop(payload.timeout,payload.key);
+        return respose;
       }
       case '55': {
-        return await redisClient.AddSet(payload.key, payload.value);
+        const respose = await redisClient.AddSet(payload.key, payload.value);
+        return respose;
       }
       case '56': {
-        return await redisClient.SetCardinality(payload.key);
+        const respose = await redisClient.SetCardinality(payload.key);
+        return respose;
       }
       case '57': {
-        return await redisClient.DifferenceBtwSets(payload.key);
+        const respose = await redisClient.DifferenceBtwSets(payload.key);
+        return respose;
       }
       case '58': {
-        return await redisClient.StoreSetDifference(payload.key, payload.keys);
+        const respose = await redisClient.StoreSetDifference(payload.key, payload.keys);
+        return respose;
       }
       case '59': {
-        return await redisClient.SetIntersect(payload.key);
+        const respose = await redisClient.SetIntersect(payload.key);
+        return respose;
       }
       case '60': {
-        return await redisClient.SetIntersectStore(payload.key, payload.keys);
+        const respose = await redisClient.SetIntersectStore(payload.key, payload.keys);
+        return respose;
       }
       case '61': {
-        return await redisClient.IsSetMember(payload.key, payload.member);
+        const respose = await redisClient.IsSetMember(payload.key, payload.member);
+        return respose;
       }
       case '62': {
-        return await redisClient.SetAllMember(payload.key);
+        const respose = await redisClient.SetAllMember(payload.key);
+        return respose;
       }
       case '63': {
-        return await redisClient.IsSetMembers(payload.key, payload.members);
+        const respose = await redisClient.IsSetMembers(payload.key, payload.members);
+        return respose;
       }
       case '64': {
-        return await redisClient.MoveSetMember(payload.source, payload.destination, payload.member);
+        const respose = await redisClient.MoveSetMember(payload.source, payload.destination, payload.member);
+        return respose;
       }
       case '65': {
-        return await redisClient.PopSetMember(payload.key, payload.option);
+        const respose = await redisClient.PopSetMember(payload.key, payload.option);
+        return respose;
       }
       case '66': {
-        return await redisClient.SetRandomNumber(payload.key, payload.option);
+        const respose = await redisClient.SetRandomNumber(payload.key, payload.option);
+        return respose;
       }
       case '67': {
-        return await redisClient.RemoveSpecificMemberFromSet(payload.key, payload.member);
+        const respose = await redisClient.RemoveSpecificMemberFromSet(payload.key, payload.member);
+        return respose;
       }
       case '68': {
-        return await redisClient.ScanSet(payload.key, payload.cursor);
+        const respose = await redisClient.ScanSet(payload.key, payload.cursor);
+        return respose;
       }
       case '69': {
-        return await redisClient.UnionOfSet(payload.key);
+        const respose = await redisClient.UnionOfSet(payload.key);
+        return respose;
       }
       case '70': {
-        return await redisClient.StoreUnionOfSet(payload.key, payload.keys);
+        const respose = await redisClient.StoreUnionOfSet(payload.key, payload.keys);
+        return respose;
       }
     }
   }

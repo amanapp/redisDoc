@@ -1,0 +1,54 @@
+"use strict";
+
+const HTTP_STATUS_CODE = {
+	OK: 200,
+	CREATED: 201,
+	UPDATED: 202,
+	NO_CONTENT: 204,
+	BAD_REQUEST: 400,
+	UNAUTHORIZED: 401,
+	PAYMENY_REQUIRED: 402,
+	ACCESS_FORBIDDEN: 403,
+	FAV_USER_NOT_FOUND: 403,
+	URL_NOT_FOUND: 404,
+	METHOD_NOT_ALLOWED: 405,
+	UNREGISTERED: 410,
+	PAYLOAD_TOO_LARGE: 413,
+	CONCURRENT_LIMITED_EXCEEDED: 429,
+	// TOO_MANY_REQUESTS: 429,
+	INTERNAL_SERVER_ERROR: 500,
+	BAD_GATEWAY: 502,
+	SHUTDOWN: 503,
+	EMAIL_NOT_VERIFIED: 430,
+	MOBILE_NOT_VERIFIED: 431,
+	FRIEND_REQUEST_ERR: 432
+
+};
+
+const MESSAGES = {
+	ERROR: {
+		BAD_REQUEST: {
+			"statusCode": HTTP_STATUS_CODE.BAD_REQUEST,
+			"type": "BAD_REQUEST"
+		}
+	},
+	SUCCESS: {
+		DEFAULT: {
+			"statusCode": HTTP_STATUS_CODE.OK,
+			"type": "Data Successfully inserted into redis"
+		},
+		DETAILS: (data: any) => {
+			return {
+				"statusCode": HTTP_STATUS_CODE.OK,
+				"type": "operation successfully performed",
+				"data": data
+			};
+		},
+	}
+
+};
+
+export {
+    HTTP_STATUS_CODE,
+    MESSAGES
+}

@@ -3,6 +3,7 @@ import { SERVER } from "../../config/envirment";
 import { loggers } from "../../lib/logger";
 import { Conditions } from "../../utils/conditions.utils";
 import { HashDataType } from "./hash.controller";
+import { responseHandler } from "../../utils/responseHandler";
 
 export const hashRoute: ServerRoute[] = [
   {
@@ -16,7 +17,7 @@ export const hashRoute: ServerRoute[] = [
         return h.response({ message: Conditions.hash, statusCode: 200 }).code(200);
       } catch (error: any) {
         loggers.error(error);
-        return h.response({ error: "error", statusCode: 500 }).code(500);
+        return responseHandler.sendError(request, error);
       }
     },
   },
@@ -32,15 +33,10 @@ export const hashRoute: ServerRoute[] = [
         const payload: any = request.payload;
         const query: any = request.query;
         const result = await HashDataType.data(query, payload);
-        return h
-          .response({
-            message: " sucessfull operation perform ",
-            statusCode: 200,
-          })
-          .code(200);
+        return responseHandler.sendSuccess(h, result);
       } catch (error: any) {
         loggers.error(error);
-        return h.response({ error: "error", statusCode: 500 }).code(500);
+        return responseHandler.sendError(request, error);
       }
     },
   },

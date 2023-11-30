@@ -21,123 +21,139 @@ class RedisClient {
     await this.client.connect();
     loggers.info(`${customMessage.REDIS_CONECTED}`);
   }
-  async set(key: any, value: any, option?: any): Promise<any> {
-    return await this.client.set(key, value, option);
-  }
-  async get(key: string): Promise<any> {
-    return await this.client.get(key);
-  }
-  async ttl(key: string): Promise<any> {
-    return await this.client.ttl(key);
-  }
-  async incr(key: string, option?: any): Promise<any> {
-    const result = await this.client.incr(key);
-
-    if (option && option.ttl) {
-      await this.client.expire(key, option.ttl);
+  async set(key: any, value: any, option?: any){
+    try{
+      const result = await this.client.set(key, value, option);
+      return result;
     }
+    catch(error){
+      throw error;
+    }
+  }
+  async get(key: string){
+    try{
+      const result = await this.client.get(key);
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
+    };
 
-    return result;
+  async ttl(key: string) {
+    try{
+      const result = await this.client.ttl(key);
+      return result;
+    }
+    catch(error){
+      throw error
+    }
+  }
+  async incr(key: string) {
+    try{
+      const result = await this.client.incr(key);
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
   async append(key: any, value: any) {
-    return await this.client.append(
-      key,
-      ` ${value}`,
-      (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      }
-    );
+    try{
+      const result = await this.client.append(key,` ${value}`)
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
   async decrease(key: string) {
-    return this.client.decr(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.decr(key)
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async decreaseBy(key: string, decrement: any) {
-    return this.client.DECRBY(key, decrement, (err: any, reply: any) => {
-      if (err) {
-        console.error(err.message);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.DECRBY(key, decrement);
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async getanddelete(key: string) {
-    return this.client.GETDEL(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.GETDEL(key)
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async getByRange(key: string, start: number, end: number) {
-    return this.client.GETRANGE(key, start, end, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.GETRANGE(key, start, end)
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async increaseBy(key: string, increment: number) {
-    return this.client.INCRBY(key, increment, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.INCRBY(key, increment)
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async lcs(key1: string, key2: string) {
-    return this.client.lcs(key1, key2, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try{
+      const result = await this.client.lcs(key1, key2);
+      return result;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
   async multipleGet(key1: string, key2: string) {
-    let arr = [];
-    arr.push(key1);
-    arr.push(key2);
-    return this.client.MGET(key1, key2, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      let arr = [];
+      arr.push(key1);
+      arr.push(key2);
+      const result = await this.client.MGET(key1, key2)
+      return result;
+    } 
+    catch (error) {
+      throw error;
+    }
+    
   }
 
   async multipleSet(key1: string, key2: string, value1: any, value2: any) {
-    let arr = [];
-    arr.push(key1);
-    arr.push(value1);
-    arr.push(key2);
-    arr.push(value2);
-    return this.client.MSET(arr, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      let arr = [];
+      arr.push(key1);
+      arr.push(value1);
+      arr.push(key2);
+      arr.push(value2);
+      const result = await this.client.MSET(arr);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async multipleSetNotExist(
@@ -146,153 +162,131 @@ class RedisClient {
     value1: any,
     value2: any
   ) {
-    let arr = [];
-    arr.push(key1);
-    arr.push(value1);
-    arr.push(key2);
-    arr.push(value2);
-    return this.client.MSETNX(arr, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      let arr = [];
+      arr.push(key1);
+      arr.push(value1);
+      arr.push(key2);
+      arr.push(value2);
+      const result = await this.client.MSETNX(arr);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async setex(key: string, value: any, expiresInSeconds: number) {
-    return this.client.SETEX(
-      key,
-      expiresInSeconds,
-      value,
-      (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      }
-    );
+    try {
+      const result = await this.client.SETEX(key,expiresInSeconds,value)
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async setByRange(key: string, value: any, offset: number) {
-    return this.client.SETRANGE(key, offset, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SETRANGE(key, offset, value);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getLength(key: string) {
-    return this.client.STRLEN(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.STRLEN(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async hashSet(key: string, field: any, val: any) {
-    return this.client.HSET(key, field, val, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HSET(key, field, val);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async deleteHashField(key: string, field: any) {
-    return this.client.HDEL(key, field, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HDEL(key, field);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async ExistFiledInHash(key: string, field: any) {
-    return this.client.HEXISTS(key, field, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HEXISTS(key, field);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async GetHashField(key: string, field: any) {
-    return this.client.HGET(key, field, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HGET(key, field);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async GetHash(key: string) {
-    return this.client.HGETALL(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HGETALL(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async IncreaseHashFieldVal(key: string, field: any, increment: any) {
-    return this.client.HINCRBY(
-      key,
-      field,
-      increment,
-      (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      }
-    );
+    try {
+      const result = await this.client.HINCRBY(key,field,increment)
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async IncreaseHashFieldFloatValue(key: string, field: any, increment: any) {
-    return this.client.HINCRBYFLOAT(
-      key,
-      field,
-      increment,
-      (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      }
-    );
+    try {
+      const result = await this.client.HINCRBYFLOAT(key,field,increment);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async HashAllField(key: string) {
-    return this.client.HKEYS(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HKEYS(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async HashLength(key: string) {
-    return this.client.HLEN(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HLEN(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async GetMultipleFieldFromHash(
@@ -301,152 +295,135 @@ class RedisClient {
     field2: string,
     field3: string
   ) {
-    let arr = [];
-    arr.push(field1);
-    arr.push(field2);
-    arr.push(field3);
-    return this.client.HMGET(key, arr, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      let arr = [];
+      arr.push(field1);
+      arr.push(field2);
+      arr.push(field3);
+      const result = await this.client.HMGET(key, arr);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async GetRandomValuesFromHash(key: string) {
-    return this.client.HRANDFIELD(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HRANDFIELD(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ScanHash(key: string, cursor: number) {
-    return this.client.HSCAN(key, cursor, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HSCAN(key, cursor);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async HashFieldNotExist(key: string, field: any, value: any) {
-    return this.client.HSETNX(key, field, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HSETNX(key, field, value);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async HashFieldLength(key: string, field: any) {
-    return this.client.HSTRLEN(key, field, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HSTRLEN(key, field);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async GetHashValues(key: string) {
-    return this.client.HVALS(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.HVALS(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListPushHead(key: string, value: any) {
-    console.log(key, value);
-    return this.client.LPUSH(key, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
-    // await this.client.lPush(
-    //   'bikes:repairs', ['bike:1', 'bike:2', 'bike:3', 'bike:4', 'bike:5']
-    // );
+    try {
+      const result = await this.client.LPUSH(key, value);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListPushTail(key: string, value: string) {
-    console.log(key, value);
-    return this.client.RPUSH(key, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.RPUSH(key, value);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListPopHead(key: string) {
-    console.log(key);
-    return this.client.LPOP(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LPOP(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async AddSet(key: string, value: any) {
-    return this.client.SADD(key, value, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SADD(key, value);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async ListPopTail(key: string) {
-    console.log(key);
-    return this.client.RPOP(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.RPOP(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async SetCardinality(key: string) {
-    return this.client.SCARD(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SCARD(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
   async ListLength(key: string) {
-    console.log(key);
-    return this.client.LLEN(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LLEN(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async DifferenceBtwSets(key: any) {
-    return this.client.SDIFF(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SDIFF(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListMove(
@@ -455,283 +432,243 @@ class RedisClient {
     to: string,
     from: string
   ) {
-    return this.client.LMOVE(
-      source,
-      destination,
-      to,
-      from,
-      (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      });
+    try {
+      const result = await this.client.LMOVE(source,destination,to,from);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
 
   async StoreSetDifference(key: any, keys: any) {
-    return this.client.SDIFFSTORE(key, keys, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SDIFFSTORE(key, keys);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async SetIntersect(key: any) {
-    return this.client.SINTER(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SINTER(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async SetIntersectStore(key: any, keys: any) {
-    return this.client.SINTERSTORE(key, keys, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SINTERSTORE(key, keys);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async IsSetMember(key: any, member: any) {
-    return this.client.SISMEMBER(key, member, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SISMEMBER(key, member);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async SetAllMember(key: any) {
-    return this.client.SMEMBERS(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SMEMBERS(key);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async IsSetMembers(key: any, members: any) {
-    return this.client.SMISMEMBER(key, members, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SMISMEMBER(key, members);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+    
   }
 
   async MoveSetMember(source: any, destination: any, member: any) {
-    return this.client.SMOVE(source, destination, member, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SMOVE(source, destination, member);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async PopSetMember(key: any, option?: any) {
-    if (option) {
-      return this.client.SPOP(key, option.count, (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
+    try {
+      if (option) {
+        const result = await this.client.SPOP(key, option.count)
+        return result;
       }
-      );
-    }
-    else {
-      return this.client.SPOP(key, (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      });
+      else {
+        const result = await this.client.SPOP(key)
+        return result;
+      }
+    } catch (error) {
+      throw error;
     }
   }
 
   async ListRange(key: string, to: number, from: number) {
-    return this.client.LRANGE(key, to, from, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LRANGE(key, to, from);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async SetRandomNumber(key: any, option?: any) {
-    if (option) {
-      return this.client.SRANDMEMBER(key, option.count, (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      });
-    }
-    else {
-      return this.client.SRANDMEMBER(key, (err: any, reply: any) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(reply);
-        }
-      });
+    try {
+      if (option) {
+        const result = await this.client.SRANDMEMBER(key, option.count)
+        return result;
+      }
+      else {
+        const result = await this.client.SRANDMEMBER(key)
+        return result;
+      }
+    } catch (error) {
+      throw error;
     }
   }
 
   async RemoveSpecificMemberFromSet(key: any, member: any) {
-    return this.client.SREM(key, member, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SREM(key, member);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListTrim(key: string, start: number, end: number) {
-    return this.client.LTRIM(key, start, end, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LTRIM(key, start, end);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ScanSet(key: any, cursor: any) {
-    return this.client.SSCAN(key, cursor, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SSCAN(key, cursor);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListAppend(key: string, element: object) {
-    return this.client.RPUSHX(key, element, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.RPUSHX(key, element);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async UnionOfSet(key: any) {
-    return this.client.SUNION(key, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SUNION(key);;
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListSet(key: string, index: string, element: string) {
-    return this.client.LSET(key, index, element, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LSET(key, index, element);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListElementRemove(key: string, count: string, element: string) {
-    return this.client.LREM(key, count, element, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LREM(key, count, element);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListAppendL(key: string, element: object) {
-    return this.client.LPUSHX(key, element, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LPUSHX(key, element);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListPosition(key: string, element: string, rank: string, count: string, len: string) {
-    return this.client.LPOS(key, element, rank, count, len, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LPOS(key, element, rank, count, len);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListInsert(key: string, referance: string, pivat: string, element: string) {
-    return this.client.LINSERT(key, referance, pivat, element, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LINSERT(key, referance, pivat, element);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListIndex(key: string, index: string) {
-    return this.client.LINDEX(key, index, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.LINDEX(key, index);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListBlmove(source: string, destination: string,to:string,from:string,timeout:string) {
-    return this.client.BLMOVE(source, destination,to,from,timeout, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.BLMOVE(source, destination,to,from,timeout);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async ListBlpop(timeout: number,key:object) {
-    return await this.client.BLPOP(key,timeout, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.BLPOP(key,timeout);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async ListBrpop(timeout: number,key:object) {
-    return await this.client.BRPOP(key,timeout, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.BRPOP(key,timeout);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
   async StoreUnionOfSet(key: any, keys: any) {
-    return this.client.SUNIONSTORE(key, keys, (err: any, reply: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(reply);
-      }
-    });
+    try {
+      const result = await this.client.SUNIONSTORE(key, keys);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 export const redisClient = new RedisClient();
