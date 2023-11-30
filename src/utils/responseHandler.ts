@@ -29,7 +29,7 @@ export class ResponseHandler {
 				error.type !== "ERROR" &&
 				error.type !== "FIELD_REQUIRED"
 			) {
-				error.message = request.i18n;
+				error.message = request;
 			}
 			if (!error.output) {
 				errorToSend = Boom.badRequest(error);
