@@ -1,6 +1,6 @@
 import Hapi from "@hapi/hapi";
 import { redisClient } from "./src/utils/redis";
-import { stringRoute } from "./src/modules/string/string.route";
+import { routes } from "./src/routes/index.routes";
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -18,7 +18,7 @@ class App {
     this.localRoutes();
   }
   private localRoutes() {
-    this.server.route(stringRoute)
+    this.server.route(routes)
   }
   private async startserver() {
     this.server = Hapi.server({ port: this.Port });
