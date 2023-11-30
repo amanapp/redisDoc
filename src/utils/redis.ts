@@ -696,7 +696,34 @@ class RedisClient {
       }
     });
   }
+  async ListBlmove(source: string, destination: string,to:string,from:string,timeout:string) {
+    return this.client.BLMOVE(source, destination,to,from,timeout, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
 
+  async ListBlpop(timeout: number,key:object) {
+    return await this.client.BLPOP(key,timeout, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
+  async ListBrpop(timeout: number,key:object) {
+    return await this.client.BRPOP(key,timeout, (err: any, reply: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(reply);
+      }
+    });
+  }
   async StoreUnionOfSet(key: any, keys: any) {
     return this.client.SUNIONSTORE(key, keys, (err: any, reply: any) => {
       if (err) {
