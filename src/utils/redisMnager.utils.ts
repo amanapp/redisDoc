@@ -152,6 +152,15 @@ export class redisManager {
       case '49': {
         return await redisClient.ListIndex(payload.key, payload.index);
       }
+      case '50': {
+        return await redisClient.ListBlmove(payload.source, payload.destination,payload.to,payload.from,payload.timeout);
+      }
+      case '51': {
+        return await redisClient.ListBlpop(payload.timeout,payload.key);
+      }
+      case '52': {
+        return await redisClient.ListBrpop(payload.timeout,payload.key);
+      }
       case '55': {
         return await redisClient.AddSet(payload.key, payload.value);
       }
