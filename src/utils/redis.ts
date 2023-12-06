@@ -654,6 +654,12 @@ class RedisClient {
       throw error;
     }
   }
+  /** @description pop element in list
+   * @description 
+   * @param timeout 
+   * @param key 
+   * @returns 
+   */
   async ListBrpop(timeout: number,key:object) {
     try {
       const result = await this.client.BRPOP(key,timeout);
@@ -662,6 +668,12 @@ class RedisClient {
       throw error;
     }
   }
+  /**
+   * @description store the union of sets in new set
+   * @param key 
+   * @param keys 
+   * @returns 
+   */
   async StoreUnionOfSet(key: any, keys: any) {
     try {
       const result = await this.client.SUNIONSTORE(key, keys);
@@ -670,5 +682,85 @@ class RedisClient {
       throw error;
     }
   }
+  /**
+   * @description store the geospatial value
+   * @param key 
+   * @param data 
+   * @returns 
+   */
+ async geoAdd(key :string ,data:object ){
+  try {
+    const result = await this.client.GEOADD(key, data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ /**
+  * @description compare to member geospatial location value 
+  * @param key 
+  * @param member1 
+  * @param member2 
+  * @param optional 
+  * @returns 
+  */
+ async geoDist(key :string ,member1:string,member2:string,optional:string ){
+  try {
+    const result = await this.client.GEODIST(key, member1,member2,optional);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ /**
+  * @description compare to member geospatial location value and give result in hash value
+  * @param key 
+  * @param member 
+  * @returns 
+  */
+ async geoHash(key :string ,member:object ){
+  try {
+    const result = await this.client.GEOHASH(key, member);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ /**
+  * @discription give  member geospatial location value
+  * @param key 
+  * @param member 
+  * @returns 
+  */
+ async geoPos(key :string ,member:object ){
+  try {
+    const result = await this.client.GEOPOS(key, member);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ /**
+  * @discription seraching in geospatial location
+  * @param key 
+  * @param longitude 
+  * @param latitude 
+  * @param radius 
+  * @param unit 
+  * @returns  result in arary 
+  */
+ async geoSearch(key :string ,longitude:string, latitude:string,radius:string,unit:string){
+  try {
+    const result = await this.client.GEOSEARCH(key, 
+      {
+      longitude,latitude,
+    },{
+      radius,unit
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
 }
 export const redisClient = new RedisClient();
