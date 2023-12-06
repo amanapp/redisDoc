@@ -626,5 +626,30 @@ export const Conditions = {
       "Redis Method": "GEOSEARCH",
       Method: "Get",
     },
+    "Case 76": {
+      "Query Params": {
+        choice: "76",
+      },
+      Body: {
+        key: "key",
+        "offset":7,
+        "value":1
+      },
+      description: "set bit in bitmap ",
+      "Redis Method": "SETBIT",
+      Method: "Post",
+    },
+    "Case 77": {
+      "Query Params": {
+        choice: "77",
+      },
+      Body: {
+        key: "key",
+        "offset":7,
+      },
+      description: "get bit in bitmap ",
+      "Redis Method": "GETBIT",
+      Method: "Post",
+    },
   },
 };

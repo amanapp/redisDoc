@@ -762,5 +762,37 @@ class RedisClient {
     throw error;
   }
  }
+ async bitmapSetbit(key :string ,offset:string,value:string){
+  try {
+    const result = await this.client.SETBIT(key,offset,value);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ async bitmapGetbit(key :string ,offset:string){
+  try {
+    const result = await this.client.GETBIT("kites","7");
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ async bitmapBitcount(key :string ,start:string,end:string,form:string){
+  try {
+    const result = await this.client.BITCOUNT(key,start,end,form);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
+ async bitmapBittop(operater:string,destkey:string,key:object){
+  try {
+    const result = await this.client.BITOP(operater,destkey,key);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
 }
 export const redisClient = new RedisClient();
