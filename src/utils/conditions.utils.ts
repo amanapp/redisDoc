@@ -553,7 +553,8 @@ export const Conditions = {
       description: "store the union of sets in new set",
       "Redis Method": "SUNIONSTORE",
       Method: "Post",
-    },
+    },},
+    geogeospatial:{
     "Case 71": {
       "Query Params": {
         choice: "71",
