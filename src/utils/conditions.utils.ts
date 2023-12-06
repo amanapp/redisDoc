@@ -554,5 +554,76 @@ export const Conditions = {
       "Redis Method": "SUNIONSTORE",
       Method: "Post",
     },
+    "Case 71": {
+      "Query Params": {
+        choice: "71",
+      },
+      Body: {
+        key: "new key",
+        data: [{
+          longitude: "-122.2469854",
+          latitude: "37.8104049",
+          member: "station:3",
+        },{
+          longitude: "-122.2469854",
+          latitude: "37.8104049",
+          member: "station:4", 
+        }],
+      },
+      description: "store the geospatial value ",
+      "Redis Method": "GEOADD",
+      Method: "Post",
+    },
+    "Case 72": {
+      "Query Params": {
+        choice: "72",
+      },
+      Body: {
+        key: "key",
+        member1:"member1",
+        member2:"member2",
+        optional:"optional"
+      },
+      description: "compare to member geospatial location value ",
+      "Redis Method": "GEODIST",
+      Method: "Post",
+    },
+    "Case 73": {
+      "Query Params": {
+        choice: "73",
+      },
+      Body: {
+        key: "key",
+        member:["member1","member2","member3"],
+      },
+      description: "compare to member geospatial location value and give result in hash value ",
+      "Redis Method": "GEOHASH",
+      Method: "Post",
+    },
+    "Case 74": {
+      "Query Params": {
+        choice: "74",
+      },
+      Body: {
+        key: "key",
+        member:["member1","member2","member3"],
+      },
+      description: "give  member geospatial location value",
+      "Redis Method": "GEOPOS",
+      Method: "Post",
+    },
+    "Case 75": {
+      "Query Params": {
+        choice: "75",
+        key: "key",
+        longitude:"longitude",
+        latitude:"latitude",
+        radius:"radius",
+        unit:"unit"
+      },
+      description: "seraching the geospatial location ",
+      "Redis Method": "GEOSEARCH",
+      Method: "Get",
+    },
   },
 };

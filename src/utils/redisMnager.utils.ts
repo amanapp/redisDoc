@@ -276,6 +276,26 @@ export class redisManager {
         const respose = await redisClient.StoreUnionOfSet(payload.key, payload.keys);
         return respose;
       }
+      case '71': {
+        const respose = await redisClient.geoAdd(payload.key,payload.data);
+        return respose;
+      }
+      case '72': {
+        const respose = await redisClient.geoDist(payload.key,payload.member1,payload.member2,payload.optional);
+        return respose;
+      }
+      case '73': {
+        const respose = await redisClient.geoHash(payload.key,payload.member);
+        return respose;
+      }
+      case '74': {
+        const respose = await redisClient.geoPos(payload.key,payload.member);
+        return respose;
+      }
+      case '75': {
+        const respose = await redisClient.geoSearch(payload.key,payload.longitude,payload.latitude,payload.radius,payload.unit);
+        return respose;
+      }
     }
   }
 }
