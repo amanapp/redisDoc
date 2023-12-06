@@ -296,6 +296,23 @@ export class redisManager {
         const respose = await redisClient.geoSearch(payload.key,payload.longitude,payload.latitude,payload.radius,payload.unit);
         return respose;
       }
+      case '76': {
+        const respose = await redisClient.bitmapSetbit(payload.key,payload.offset,payload.value);
+        return respose;
+      }
+      case '77': {
+        const respose = await redisClient.bitmapGetbit(payload.key,payload.offset);
+        return respose;
+      }
+      case '78': {
+        const respose = await redisClient.bitmapBitcount(payload.key,payload.start,payload.end,payload.form);
+        return respose;
+      }
+      case '79': {
+        const respose = await redisClient.bitmapBittop(payload.operater,payload.destkey,payload.key);
+        return respose;
+      }
+      
     }
   }
 }

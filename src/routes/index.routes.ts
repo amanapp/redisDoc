@@ -3,7 +3,7 @@ import { hashRoute } from "../modules/hash/hash.route";
 import { listRoute } from "../modules/list/list.route";
 import { setRoute } from "../modules/set/set.routes";
 import { geoRoute } from "../modules/geospatial/geospatial.routes";
-
+import { bitmapRoute } from "../modules/bitmap/bitmap.route";
 
 
 export const routes: any = [
@@ -12,4 +12,5 @@ export const routes: any = [
 	...listRoute,
     ...setRoute,
 	...geoRoute,
+	...bitmapRoute,
 ];
