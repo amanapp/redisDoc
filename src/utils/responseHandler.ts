@@ -1,5 +1,3 @@
-"use strict";
-
 import _ from "lodash";
 const Boom = require('boom');
 import { Request, ResponseToolkit } from "@hapi/hapi";

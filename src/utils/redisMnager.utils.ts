@@ -312,7 +312,10 @@ export class redisManager {
         const respose = await redisClient.bitmapBittop(payload.operater,payload.destkey,payload.key);
         return respose;
       }
-      
+      case '80': {
+        const respose = await redisClient.sorted_setZAdd(payload.key,payload.score,payload.member);
+        return respose;
+      }
     }
   }
 }

@@ -794,5 +794,14 @@ class RedisClient {
     throw error;
   }
  }
+ async sorted_setZAdd(key:string,score:string,member:string){
+  try {
+    console.log(member);
+    const result = await this.client.ZADD('keyabcd',[score,'member']);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+ }
 }
 export const redisClient = new RedisClient();

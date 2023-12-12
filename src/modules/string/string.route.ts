@@ -23,16 +23,18 @@ export const stringRoute: ServerRoute[] = [
   },
   {
     /**
-     * @discription Get all api Description
+     * @discription Get value using the string Method
      */
     method: "GET",
     path: `${SERVER.API_BASE_URL}/string`,
     handler: async (request: Request | any, h: ResponseToolkit) => {
       try {
-        return h.response({ message: Conditions.string, statusCode: 200 }).code(200);
+        const query: any = request.query;
+        const result = await StringDataType.getData(query);
+        return responseHandler.sendSuccess(h, result);
       } catch (error: any) {
         loggers.error(error);
-        return h.response({ error: "error", statusCode: 500 }).code(500);
+        return responseHandler.sendError(request, error);
       }
     },
   },
@@ -41,7 +43,7 @@ export const stringRoute: ServerRoute[] = [
     /**
      * @discription apply all api operation
      */
-    method: "POST",
+    method: ["POST", "PATCH", "DELETE"],
     path: `${SERVER.API_BASE_URL}/string`,
     handler: async (request: Request | any, h: ResponseToolkit) => {
       try {
